@@ -709,6 +709,11 @@ $.extend(Datepicker.prototype, {
 
 	/* Generate the date picker content. */
 	_updateDatepicker: function(inst) {
+        // do not update datepicker if inst is not curInst unless it is the first call.
+        if (!inst.dpDiv.is(':empty') && inst != $.datepicker._curInst) {
+            return;
+        }
+
 		var self = this;
 		self.maxRows = 4; //Reset the max number of rows being displayed (see #7043)
 		var borders = $.datepicker._getBorders(inst.dpDiv);
